@@ -11,14 +11,21 @@
         android:supportsRtl="true"
         android:theme="@style/public_AppTheme">
         <activity
-            android:name=".mvp.ui.activity.MainActivity"
+            android:name=".mvp.ui.activity.SplashActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".mvp.ui.activity.MainActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait">
+
         </activity>
 
         <!-- 只要依赖 AutoSize 就必须填写设计图尺寸, 否则报错, 不想使用 AutoSize 就不要依赖 AutoSize
