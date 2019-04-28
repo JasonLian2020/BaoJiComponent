@@ -28,6 +28,8 @@ import com.squareup.leakcanary.RefWatcher;
 
 import java.util.List;
 
+import me.jessyan.armscomponent.commonsdk.http.Api;
+
 /**
  * ================================================
  * 组件的全局配置信息在此配置, 需要将此实现类声明到 AndroidManifest 中
@@ -45,7 +47,7 @@ public final class GlobalConfiguration implements ConfigModule {
 
     @Override
     public void applyOptions(Context context, GlobalConfigModule.Builder builder) {
-
+        builder.baseurl(Api.APP_DOMAIN);
     }
 
     @Override
