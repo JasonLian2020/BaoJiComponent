@@ -1,7 +1,9 @@
-package com.baojiyule.baojicomponent.app;
+package com.baojiyule.baojicomponent.app.mvp.ui.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.baojiyule.baojicomponent.app.R;
 
 public class MainActivity extends AppCompatActivity {
 
