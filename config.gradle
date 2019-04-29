@@ -56,6 +56,8 @@ ext {
             "vlayout"                  : "com.alibaba.android:vlayout:1.1.0@aar",
             "lottie"                   : "com.airbnb.android:lottie:2.7.0",
             "autosize"                 : "me.jessyan:autosize:1.1.1",
+            "smart-refresh-layout"     : "com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-23",
+            "smart-refresh-header"     : "com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-23",//没有使用特殊Header，可以不加这行
 
             //rx1
             "rxandroid"                : "io.reactivex:rxandroid:1.2.1",
