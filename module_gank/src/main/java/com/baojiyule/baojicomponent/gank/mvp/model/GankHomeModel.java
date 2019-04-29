@@ -1,14 +1,18 @@
 package com.baojiyule.baojicomponent.gank.mvp.model;
 
-import android.app.Application;
-
 import com.baojiyule.baojicomponent.gank.mvp.contract.GankHomeContract;
-import com.google.gson.Gson;
+import com.baojiyule.baojicomponent.gank.mvp.model.api.service.GankService;
+import com.baojiyule.baojicomponent.gank.mvp.model.entity.GankBaseResponse;
+import com.baojiyule.baojicomponent.gank.mvp.model.entity.GankItemBean;
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
 
+import java.util.List;
+
 import javax.inject.Inject;
+
+import io.reactivex.Observable;
 
 
 /**
@@ -25,10 +29,6 @@ import javax.inject.Inject;
  */
 @ActivityScope
 public class GankHomeModel extends BaseModel implements GankHomeContract.Model {
-    @Inject
-    Gson mGson;
-    @Inject
-    Application mApplication;
 
     @Inject
     public GankHomeModel(IRepositoryManager repositoryManager) {
@@ -36,9 +36,9 @@ public class GankHomeModel extends BaseModel implements GankHomeContract.Model {
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        this.mGson = null;
-        this.mApplication = null;
+    public Observable<GankBaseResponse<List<GankItemBean>>> getGirlList(int num, int page) {
+        return mRepositoryManager
+                .obtainRetrofitService(GankService.class)
+                .getGirlList(num, page);
     }
 }

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
@@ -15,6 +16,8 @@ import com.baojiyule.baojicomponent.gank.mvp.presenter.GankHomePresenter;
 
 import com.baojiyule.baojicomponent.gank.R;
 
+
+import me.jessyan.armscomponent.commonservice.RouterHub;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
@@ -31,6 +34,7 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
  * <a href="https://github.com/JessYanCoding/MVPArmsTemplate">模版请保持更新</a>
  * ================================================
  */
+@Route(path = RouterHub.GANK_HOMEACTIVITY)
 public class GankHomeActivity extends BaseActivity<GankHomePresenter> implements GankHomeContract.View {
 
     @Override

@@ -13,5 +13,6 @@ package com.baojiyule.baojicomponent.gank.mvp.model.api;
  * ================================================
  */
 public interface Api {
-
+    String GANK_DOMAIN_NAME = "gank";
+    String GANK_DOMAIN = "http://gank.io";
 }

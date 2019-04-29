@@ -1,7 +1,13 @@
 package com.baojiyule.baojicomponent.gank.mvp.contract;
 
-import com.jess.arms.mvp.IView;
+import com.baojiyule.baojicomponent.gank.mvp.model.entity.GankBaseResponse;
+import com.baojiyule.baojicomponent.gank.mvp.model.entity.GankItemBean;
 import com.jess.arms.mvp.IModel;
+import com.jess.arms.mvp.IView;
+
+import java.util.List;
+
+import io.reactivex.Observable;
 
 
 /**
@@ -24,6 +30,6 @@ public interface GankHomeContract {
 
     //Model层定义接口,外部只需关心Model返回的数据,无需关心内部细节,即是否使用缓存
     interface Model extends IModel {
-
+        Observable<GankBaseResponse<List<GankItemBean>>> getGirlList(int num, int page);
     }
 }
