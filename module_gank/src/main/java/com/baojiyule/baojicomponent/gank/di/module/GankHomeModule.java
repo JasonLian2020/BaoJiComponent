@@ -1,10 +1,20 @@
 package com.baojiyule.baojicomponent.gank.di.module;
 
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+
 import com.baojiyule.baojicomponent.gank.mvp.contract.GankHomeContract;
 import com.baojiyule.baojicomponent.gank.mvp.model.GankHomeModel;
+import com.baojiyule.baojicomponent.gank.mvp.model.entity.GankItemBean;
+import com.baojiyule.baojicomponent.gank.mvp.ui.adapter.GankHomeAdapter;
+import com.jess.arms.di.scope.ActivityScope;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import dagger.Binds;
 import dagger.Module;
+import dagger.Provides;
 
 
 /**
@@ -24,4 +34,22 @@ public abstract class GankHomeModule {
 
     @Binds
     abstract GankHomeContract.Model bindGankHomeModel(GankHomeModel model);
+
+    @ActivityScope
+    @Provides
+    static RecyclerView.LayoutManager provideLayoutManager(GankHomeContract.View view) {
+        return new GridLayoutManager(view.getActivity(), 2);
+    }
+
+    @ActivityScope
+    @Provides
+    static List<GankItemBean> provideGankList() {
+        return new ArrayList<>();
+    }
+
+    @ActivityScope
+    @Provides
+    static RecyclerView.Adapter provideGankHomeAdapter() {
+        return new GankHomeAdapter(new ArrayList<>());
+    }
 }

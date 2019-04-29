@@ -5,12 +5,12 @@ import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.OnLifecycleEvent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.SupportActivity;
+import android.support.v7.widget.RecyclerView;
 
 import com.baojiyule.baojicomponent.gank.mvp.contract.GankHomeContract;
 import com.baojiyule.baojicomponent.gank.mvp.model.entity.GankBaseResponse;
 import com.baojiyule.baojicomponent.gank.mvp.model.entity.GankItemBean;
 import com.jess.arms.di.scope.ActivityScope;
-import com.jess.arms.http.imageloader.ImageLoader;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.utils.RxLifecycleUtils;
@@ -45,14 +45,15 @@ public class GankHomePresenter extends BasePresenter<GankHomeContract.Model, Gan
     @Inject
     RxErrorHandler mErrorHandler;
     @Inject
+    AppManager mAppManager;
+    @Inject
     Application mApplication;
     @Inject
-    ImageLoader mImageLoader;
+    List<GankItemBean> mDatas;
     @Inject
-    AppManager mAppManager;
+    RecyclerView.Adapter mAdapter;
 
     private int lastPage = 1;
-    private int preEndIndex;
 
     @Inject
     public GankHomePresenter(GankHomeContract.Model model, GankHomeContract.View rootView) {
@@ -64,8 +65,9 @@ public class GankHomePresenter extends BasePresenter<GankHomeContract.Model, Gan
         super.onDestroy();
         this.mErrorHandler = null;
         this.mAppManager = null;
-        this.mImageLoader = null;
         this.mApplication = null;
+        this.mDatas = null;
+        this.mAdapter = null;
     }
 
     /**
@@ -84,18 +86,33 @@ public class GankHomePresenter extends BasePresenter<GankHomeContract.Model, Gan
                 .subscribeOn(Schedulers.io())
                 .retryWhen(new RetryWithDelay(3, 2))//遇到错误时重试,第一个参数为重试几次,第二个参数为重试的间隔
                 .doOnSubscribe(disposable -> {
-                    mRootView.showLoading();//显示下拉刷新的进度条
+                    if (pullToRefresh)
+                        mRootView.showLoading();//显示下拉刷新的进度条
+                    else
+                        mRootView.startLoadMore();//显示上拉加载更多的进度条
                 })
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doFinally(() -> {
-                    mRootView.hideLoading();//隐藏下拉刷新的进度条
+                    if (pullToRefresh)
+                        mRootView.hideLoading();//隐藏下拉刷新的进度条
+                    else
+                        mRootView.endLoadMore();//隐藏上拉加载更多的进度条
                 })
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))//使用 Rxlifecycle,使 Disposable 和 Activity 一起销毁
                 .subscribe(new ErrorHandleSubscriber<GankBaseResponse<List<GankItemBean>>>(mErrorHandler) {
                     @Override
                     public void onNext(GankBaseResponse<List<GankItemBean>> datas) {
-
+                        lastPage = lastPage + 1;
+                        if (pullToRefresh) {
+                            mDatas.clear();//如果是下拉刷新则清空列表
+                            mDatas.addAll(datas.getResults());
+                            mAdapter.notifyDataSetChanged();
+                        } else {
+                            int preEndIndex = mDatas.size();//更新之前列表总长度,用于确定加载更多的起始位置
+                            mDatas.addAll(datas.getResults());
+                            mAdapter.notifyItemRangeInserted(preEndIndex, datas.getResults().size());
+                        }
                     }
                 });
     }
