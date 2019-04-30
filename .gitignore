@@ -41,3 +41,12 @@ captures/
 
 # MacOS
 .DS_Store
+
+# bugly
+*/bugly
+
+# release
+*/release
+
+# priguardMapping.txt
+*/priguardMapping.txt
