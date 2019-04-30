@@ -254,3 +254,7 @@
 
 # Marshmallow removed Notification.setLatestEventInfo()
 -dontwarn android.app.Notification
+
+################bugly#################
+-dontwarn com.tencent.bugly.**
+-keep public class com.tencent.bugly.**{*;}

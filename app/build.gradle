@@ -1,4 +1,10 @@
 apply plugin: 'com.android.application'
+apply plugin: 'bugly'
+
+bugly {
+    appId = "4db7f8a8f7" // 注册时分配的App ID
+    appKey = "0250e053-0b8d-4df9-b65e-379f52723242" // 注册时分配的App Key
+}
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
@@ -21,6 +27,11 @@ android {
             annotationProcessorOptions {
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
+        }
+
+        ndk {
+            // 设置支持的SO库架构
+            abiFilters 'armeabi' //, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
         }
     }
 

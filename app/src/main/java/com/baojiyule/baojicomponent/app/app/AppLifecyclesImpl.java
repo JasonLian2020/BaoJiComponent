@@ -24,6 +24,7 @@ import com.jess.arms.base.delegate.AppLifecycles;
 import com.jess.arms.utils.ArmsUtils;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
+import com.tencent.bugly.crashreport.CrashReport;
 
 
 /**
@@ -51,6 +52,9 @@ public class AppLifecyclesImpl implements AppLifecycles {
         }
         //leakCanary内存泄露检查
         ArmsUtils.obtainAppComponentFromContext(application).extras().put(RefWatcher.class.getName(), BuildConfig.USE_CANARY ? LeakCanary.install(application) : RefWatcher.DISABLED);
+        //bugly
+        CrashReport.initCrashReport(application, "4db7f8a8f7", true);
+        CrashReport.setAppVersion(application, BuildConfig.VERSION_NAME);
     }
 
     @Override
