@@ -1,8 +1,10 @@
 package com.baojiyule.baojicomponent.zhihu.mvp.model;
 
+import com.baojiyule.baojicomponent.zhihu.mvp.contract.ZhihuDetailContract;
 import com.baojiyule.baojicomponent.zhihu.mvp.contract.ZhihuHomeContract;
 import com.baojiyule.baojicomponent.zhihu.mvp.model.api.service.ZhihuService;
 import com.baojiyule.baojicomponent.zhihu.mvp.model.entity.DailyListBean;
+import com.baojiyule.baojicomponent.zhihu.mvp.model.entity.ZhihuDetailBean;
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
@@ -25,7 +27,7 @@ import io.reactivex.Observable;
  * ================================================
  */
 @ActivityScope
-public class ZhihuModel extends BaseModel implements ZhihuHomeContract.Model {
+public class ZhihuModel extends BaseModel implements ZhihuHomeContract.Model, ZhihuDetailContract.Model {
 
     @Inject
     public ZhihuModel(IRepositoryManager repositoryManager) {
@@ -36,5 +38,11 @@ public class ZhihuModel extends BaseModel implements ZhihuHomeContract.Model {
     public Observable<DailyListBean> getDailyList() {
         return mRepositoryManager.obtainRetrofitService(ZhihuService.class)
                 .getDailyList();
+    }
+
+    @Override
+    public Observable<ZhihuDetailBean> getDetailInfo(int id) {
+        return mRepositoryManager.obtainRetrofitService(ZhihuService.class)
+                .getDetailInfo(id);
     }
 }

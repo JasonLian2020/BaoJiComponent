@@ -16,11 +16,13 @@
 package com.baojiyule.baojicomponent.zhihu.mvp.model.api.service;
 
 import com.baojiyule.baojicomponent.zhihu.mvp.model.entity.DailyListBean;
+import com.baojiyule.baojicomponent.zhihu.mvp.model.entity.ZhihuDetailBean;
 
 import io.reactivex.Observable;
 import retrofit2.Retrofit;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.Path;
 
 import static com.baojiyule.baojicomponent.zhihu.mvp.model.api.Api.ZHIHU_DOMAIN_NAME;
 import static me.jessyan.retrofiturlmanager.RetrofitUrlManager.DOMAIN_NAME_HEADER;
@@ -42,4 +44,11 @@ public interface ZhihuService {
     @Headers({DOMAIN_NAME_HEADER + ZHIHU_DOMAIN_NAME})
     @GET("/api/4/news/latest")
     Observable<DailyListBean> getDailyList();
+
+    /**
+     * 日报详情
+     */
+    @Headers({DOMAIN_NAME_HEADER + ZHIHU_DOMAIN_NAME})
+    @GET("/api/4/news/{id}")
+    Observable<ZhihuDetailBean> getDetailInfo(@Path("id") int id);
 }
