@@ -32,7 +32,9 @@ dependencies {
     }
     api rootProject.ext.dependencies["paginate"]
     api rootProject.ext.dependencies["lottie"]
+    // 约束布局
     api rootProject.ext.dependencies["constraint-layout"]
+    // 刷新框架
     api rootProject.ext.dependencies["smart-refresh-layout"]
     api rootProject.ext.dependencies["smart-refresh-header"]
 }
