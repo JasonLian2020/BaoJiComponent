@@ -1,6 +1,7 @@
 include ':app',
         ':CommonSDK',
-        ':CommonService',
         ':CommonRes',
+        ':CommonUI',
+        ':CommonService',
         ':module_zhihu',
         ':module_gank'
