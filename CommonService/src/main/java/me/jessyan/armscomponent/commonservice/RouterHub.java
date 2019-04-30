@@ -58,7 +58,7 @@ public interface RouterHub {
      */
     String APP_SPLASHACTIVITY = APP + "/SplashActivity";
     String APP_MAINACTIVITY = APP + "/MainActivity";
-
+    String APP_MAIN2ACTIVITY = APP + "/Main2Activity";
 
     /**
      * 知乎分组
