@@ -20,6 +20,7 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
+import com.baojiyule.baojicomponent.app.mvp.model.api.Api;
 import com.jess.arms.base.delegate.AppLifecycles;
 import com.jess.arms.di.module.GlobalConfigModule;
 import com.jess.arms.integration.ConfigModule;
@@ -28,7 +29,6 @@ import com.squareup.leakcanary.RefWatcher;
 
 import java.util.List;
 
-import me.jessyan.armscomponent.commonsdk.http.Api;
 
 /**
  * ================================================
