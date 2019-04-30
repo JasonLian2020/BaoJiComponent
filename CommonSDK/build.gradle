@@ -46,4 +46,7 @@ dependencies {
         exclude module: 'support-annotations'
     }
     api rootProject.ext.dependencies["retrofit-url-manager"]
+    //bugly crashreport
+    api rootProject.ext.dependencies["crashreport-sdk"]
+    api rootProject.ext.dependencies["crashreport-ndk"]
 }

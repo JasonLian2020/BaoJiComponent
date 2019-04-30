@@ -98,6 +98,8 @@ ext {
             "progressmanager"          : "me.jessyan:progressmanager:1.5.0",
             "retrofit-url-manager"     : "me.jessyan:retrofit-url-manager:1.4.0",
             "lifecyclemodel"           : "me.jessyan:lifecyclemodel:1.0.1",
+            "crashreport-sdk"          : "com.tencent.bugly:crashreport:2.8.6",//Bugly SDK
+            "crashreport-ndk"          : "com.tencent.bugly:nativecrashreport:3.6.0",//Bugly NDK
 
             //test
             "junit"                    : "junit:junit:4.12",
