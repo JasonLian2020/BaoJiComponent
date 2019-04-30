@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.baojiyule.baojicomponent.zhihu.R;
 import com.baojiyule.baojicomponent.zhihu.R2;
 import com.baojiyule.baojicomponent.zhihu.di.component.DaggerZhihuHomeComponent;
@@ -20,6 +21,7 @@ import com.jess.arms.utils.ArmsUtils;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import me.jessyan.armscomponent.commonservice.RouterHub;
 import timber.log.Timber;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
@@ -37,6 +39,7 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
  * <a href="https://github.com/JessYanCoding/MVPArmsTemplate">模版请保持更新</a>
  * ================================================
  */
+@Route(path = RouterHub.ZHIHU_HOMEACTIVITY)
 public class ZhihuHomeActivity extends BaseActivity<ZhihuHomePresenter> implements ZhihuHomeContract.View, SwipeRefreshLayout.OnRefreshListener {
     @BindView(R2.id.recyclerView)
     RecyclerView mRecyclerView;
