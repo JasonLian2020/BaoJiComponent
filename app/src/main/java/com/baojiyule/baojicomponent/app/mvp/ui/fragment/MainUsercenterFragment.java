@@ -16,6 +16,8 @@ import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
+import me.jessyan.armscomponent.commonres.utils.FragmentUtil;
+
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
 
@@ -55,7 +57,7 @@ public class MainUsercenterFragment extends BaseFragment<MainUsercenterPresenter
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
-
+        FragmentUtil.setTitle(this, R.string.main_home_usercenter);
     }
 
     @Override

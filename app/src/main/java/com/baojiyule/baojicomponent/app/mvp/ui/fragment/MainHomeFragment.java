@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import me.jessyan.armscomponent.commonres.utils.FragmentUtil;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
@@ -80,6 +81,7 @@ public class MainHomeFragment extends BaseFragment<MainHomePresenter> implements
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
+        FragmentUtil.setTitle(this, R.string.main_home_title);
         initFragmentList();
         initViewPager();
     }
