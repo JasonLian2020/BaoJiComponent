@@ -124,7 +124,8 @@ public class MainHomeFragment extends BaseFragment<MainHomePresenter> implements
         if (mFragmentList == null) mFragmentList = new ArrayList<>();
         else mFragmentList.clear();
         //
-        for (String title : mTitleList) {
+        for (int i = 0; i < mTitleList.length; i++) {
+            mFragmentList.add(HomeDetailFragment.newInstance(i));
         }
         return mFragmentList;
     }
