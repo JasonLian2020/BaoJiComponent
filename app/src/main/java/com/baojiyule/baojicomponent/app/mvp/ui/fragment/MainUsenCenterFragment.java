@@ -7,10 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.baojiyule.baojicomponent.app.R;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 
-public class MainUsencenterFragment extends BaseFragment {
+public class MainUsenCenterFragment extends BaseFragment {
     @Override
     public void setupFragmentComponent(@NonNull AppComponent appComponent) {
 
@@ -18,7 +19,8 @@ public class MainUsencenterFragment extends BaseFragment {
 
     @Override
     public View initView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return null;
+        View rootView = inflater.inflate(R.layout.fragment_main_usercenter, container, false);
+        return rootView;
     }
 
     @Override

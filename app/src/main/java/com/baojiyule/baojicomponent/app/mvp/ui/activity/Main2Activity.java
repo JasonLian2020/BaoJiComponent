@@ -11,7 +11,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.baojiyule.baojicomponent.app.R;
 import com.baojiyule.baojicomponent.app.mvp.ui.fragment.MainHomeFragment;
 import com.baojiyule.baojicomponent.app.mvp.ui.fragment.MainRecommendFragment;
-import com.baojiyule.baojicomponent.app.mvp.ui.fragment.MainUsencenterFragment;
+import com.baojiyule.baojicomponent.app.mvp.ui.fragment.MainUsenCenterFragment;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
@@ -30,6 +30,9 @@ public class Main2Activity extends BaseActivity {
     ImageView tvUserCenter;
 
     private BaseFragment currentFragment;
+    private BaseFragment homeFragment;
+    private BaseFragment recommendFragment;
+    private BaseFragment userCenterFragment;
 
     @Override
     public void setupActivityComponent(@NonNull AppComponent appComponent) {
@@ -43,7 +46,7 @@ public class Main2Activity extends BaseActivity {
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
-
+        showFragmentByHome();
     }
 
 
@@ -51,15 +54,30 @@ public class Main2Activity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tvHome:
+                showFragmentByHome();
                 break;
             case R.id.tvRecommend:
+                showFragmentByRecommend();
                 break;
             case R.id.tvUserCenter:
+                showFragmentByUserCenter();
                 break;
         }
     }
 
-    private void showFragment(BaseFragment baseFragment, Class<BaseFragment> _class) {
+    private void showFragmentByHome() {
+        showFragment(homeFragment, MainHomeFragment.class);
+    }
+
+    private void showFragmentByRecommend() {
+        showFragment(recommendFragment, MainRecommendFragment.class);
+    }
+
+    private void showFragmentByUserCenter() {
+        showFragment(userCenterFragment, MainUsenCenterFragment.class);
+    }
+
+    private void showFragment(BaseFragment baseFragment, Class _class) {
         if (currentFragment == baseFragment && currentFragment != null) return;
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         if (currentFragment != null) ft.hide(currentFragment);
@@ -78,7 +96,7 @@ public class Main2Activity extends BaseActivity {
         refreshBottomUI(_class);
     }
 
-    private BaseFragment getBaseFragmentByClass(Class<BaseFragment> _class) {
+    private BaseFragment getBaseFragmentByClass(Class<? extends BaseFragment> _class) {
         BaseFragment baseFragment = null;
         try {
             baseFragment = _class.newInstance();
@@ -90,23 +108,42 @@ public class Main2Activity extends BaseActivity {
         return baseFragment;
     }
 
-    private BaseFragment newInstanceByClass(Class<BaseFragment> _class) {
+    private BaseFragment newInstanceByClass(Class<? extends BaseFragment> _class) {
         BaseFragment baseFragment = getBaseFragmentByClass(_class);
         if (baseFragment instanceof MainHomeFragment)
             return new MainHomeFragment();
         else if (baseFragment instanceof MainRecommendFragment)
             return new MainRecommendFragment();
-        else if (baseFragment instanceof MainUsencenterFragment)
-            return new MainUsencenterFragment();
+        else if (baseFragment instanceof MainUsenCenterFragment)
+            return new MainUsenCenterFragment();
         return null;
     }
 
-    private String getTagByClass(Class<BaseFragment> _class) {
+    private String getTagByClass(Class<? extends BaseFragment> _class) {
         BaseFragment baseFragment = getBaseFragmentByClass(_class);
+        if (baseFragment instanceof MainHomeFragment)
+            return "MainHomeFragment";
+        else if (baseFragment instanceof MainRecommendFragment)
+            return "MainRecommendFragment";
+        else if (baseFragment instanceof MainUsenCenterFragment)
+            return "MainUsenCenterFragment";
         return null;
     }
 
-    private void refreshBottomUI(Class<BaseFragment> _class) {
+    private void refreshBottomUI(Class<? extends BaseFragment> _class) {
         BaseFragment baseFragment = getBaseFragmentByClass(_class);
+        if (baseFragment instanceof MainHomeFragment) {
+            tvHome.setSelected(true);
+            tvRecommend.setSelected(false);
+            tvUserCenter.setSelected(false);
+        } else if (baseFragment instanceof MainRecommendFragment) {
+            tvHome.setSelected(false);
+            tvRecommend.setSelected(true);
+            tvUserCenter.setSelected(false);
+        } else if (baseFragment instanceof MainUsenCenterFragment) {
+            tvHome.setSelected(false);
+            tvRecommend.setSelected(false);
+            tvUserCenter.setSelected(true);
+        }
     }
 }

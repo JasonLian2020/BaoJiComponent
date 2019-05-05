@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.baojiyule.baojicomponent.app.R;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 
@@ -18,7 +19,8 @@ public class MainRecommendFragment extends BaseFragment {
 
     @Override
     public View initView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return null;
+        View rootView = inflater.inflate(R.layout.fragment_main_recommend, container, false);
+        return rootView;
     }
 
     @Override
