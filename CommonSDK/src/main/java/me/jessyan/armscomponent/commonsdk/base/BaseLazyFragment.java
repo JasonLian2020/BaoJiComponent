@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.mvp.IPresenter;
 
-public abstract class BaseLazyFragment<P extends IPresenter> extends BaseFragment {
+public abstract class BaseLazyFragment<P extends IPresenter> extends BaseFragment<P> {
     /**
      * 缓存View，不需要每次都初始化
      */
