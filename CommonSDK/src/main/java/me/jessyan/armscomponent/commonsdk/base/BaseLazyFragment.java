@@ -63,8 +63,14 @@ public abstract class BaseLazyFragment<P extends IPresenter> extends BaseFragmen
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
-        //Do nothing, Because there is no lazy loading
+        initViewConfig();
     }
+
+    /**
+     * 由于框架{@link BaseFragment#initData(Bundle)}方法默认不是懒加载，但是view初始化配置又放在该方法，
+     * 所以提供了该{@link #initViewConfig()}来实现该需求，{@link #initData()}来实现懒加载。
+     */
+    protected abstract void initViewConfig();
 
     /**
      * 初始化数据
@@ -74,14 +80,14 @@ public abstract class BaseLazyFragment<P extends IPresenter> extends BaseFragmen
     /**
      * 视图不可见时候的回调
      */
-    protected void onInvisible() {
-
+    private void onInvisible() {
+        //do nothing
     }
 
     /**
      * 视图可见时候的回调
      */
-    protected void onVisible() {
+    private void onVisible() {
         if (!isPrepared || !isVisible || !isFirst) {
             return;
         }
