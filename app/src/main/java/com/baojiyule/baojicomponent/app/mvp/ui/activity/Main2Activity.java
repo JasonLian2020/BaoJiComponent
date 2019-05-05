@@ -11,7 +11,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.baojiyule.baojicomponent.app.R;
 import com.baojiyule.baojicomponent.app.mvp.ui.fragment.MainHomeFragment;
 import com.baojiyule.baojicomponent.app.mvp.ui.fragment.MainRecommendFragment;
-import com.baojiyule.baojicomponent.app.mvp.ui.fragment.MainUsenCenterFragment;
+import com.baojiyule.baojicomponent.app.mvp.ui.fragment.MainUsercenterFragment;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
@@ -74,7 +74,7 @@ public class Main2Activity extends BaseActivity {
     }
 
     private void showFragmentByUserCenter() {
-        showFragment(userCenterFragment, MainUsenCenterFragment.class);
+        showFragment(userCenterFragment, MainUsercenterFragment.class);
     }
 
     private void showFragment(BaseFragment baseFragment, Class _class) {
@@ -111,11 +111,11 @@ public class Main2Activity extends BaseActivity {
     private BaseFragment newInstanceByClass(Class<? extends BaseFragment> _class) {
         BaseFragment baseFragment = getBaseFragmentByClass(_class);
         if (baseFragment instanceof MainHomeFragment)
-            return new MainHomeFragment();
+            return MainHomeFragment.newInstance();
         else if (baseFragment instanceof MainRecommendFragment)
-            return new MainRecommendFragment();
-        else if (baseFragment instanceof MainUsenCenterFragment)
-            return new MainUsenCenterFragment();
+            return MainRecommendFragment.newInstance();
+        else if (baseFragment instanceof MainUsercenterFragment)
+            return MainUsercenterFragment.newInstance();
         return null;
     }
 
@@ -125,7 +125,7 @@ public class Main2Activity extends BaseActivity {
             return "MainHomeFragment";
         else if (baseFragment instanceof MainRecommendFragment)
             return "MainRecommendFragment";
-        else if (baseFragment instanceof MainUsenCenterFragment)
+        else if (baseFragment instanceof MainUsercenterFragment)
             return "MainUsenCenterFragment";
         return null;
     }
@@ -140,7 +140,7 @@ public class Main2Activity extends BaseActivity {
             tvHome.setSelected(false);
             tvRecommend.setSelected(true);
             tvUserCenter.setSelected(false);
-        } else if (baseFragment instanceof MainUsenCenterFragment) {
+        } else if (baseFragment instanceof MainUsercenterFragment) {
             tvHome.setSelected(false);
             tvRecommend.setSelected(false);
             tvUserCenter.setSelected(true);

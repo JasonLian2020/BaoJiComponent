@@ -14,9 +14,9 @@ import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
-import com.baojiyule.baojicomponent.app.di.component.DaggerMainRecommendComponent;
-import com.baojiyule.baojicomponent.app.mvp.contract.MainRecommendContract;
-import com.baojiyule.baojicomponent.app.mvp.presenter.MainRecommendPresenter;
+import com.baojiyule.baojicomponent.app.di.component.DaggerMainUsercenterComponent;
+import com.baojiyule.baojicomponent.app.mvp.contract.MainUsercenterContract;
+import com.baojiyule.baojicomponent.app.mvp.presenter.MainUsercenterPresenter;
 
 import com.baojiyule.baojicomponent.app.R;
 
@@ -27,7 +27,7 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
  * ================================================
  * Description:
  * <p>
- * Created by MVPArmsTemplate on 05/05/2019 12:05
+ * Created by MVPArmsTemplate on 05/05/2019 12:06
  * <a href="mailto:jess.yan.effort@gmail.com">Contact me</a>
  * <a href="https://github.com/JessYanCoding">Follow me</a>
  * <a href="https://github.com/JessYanCoding/MVPArms">Star me</a>
@@ -35,16 +35,16 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
  * <a href="https://github.com/JessYanCoding/MVPArmsTemplate">模版请保持更新</a>
  * ================================================
  */
-public class MainRecommendFragment extends BaseFragment<MainRecommendPresenter> implements MainRecommendContract.View {
+public class MainUsercenterFragment extends BaseFragment<MainUsercenterPresenter> implements MainUsercenterContract.View {
 
-    public static MainRecommendFragment newInstance() {
-        MainRecommendFragment fragment = new MainRecommendFragment();
+    public static MainUsercenterFragment newInstance() {
+        MainUsercenterFragment fragment = new MainUsercenterFragment();
         return fragment;
     }
 
     @Override
     public void setupFragmentComponent(@NonNull AppComponent appComponent) {
-        DaggerMainRecommendComponent //如找不到该类,请编译一下项目
+        DaggerMainUsercenterComponent //如找不到该类,请编译一下项目
                 .builder()
                 .appComponent(appComponent)
                 .view(this)
@@ -54,7 +54,7 @@ public class MainRecommendFragment extends BaseFragment<MainRecommendPresenter> 
 
     @Override
     public View initView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_main_recommend, container, false);
+        return inflater.inflate(R.layout.fragment_main_usercenter, container, false);
     }
 
     @Override
