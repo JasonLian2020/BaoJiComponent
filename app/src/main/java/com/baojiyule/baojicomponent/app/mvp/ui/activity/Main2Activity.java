@@ -77,7 +77,7 @@ public class Main2Activity extends BaseActivity {
         showFragment(userCenterFragment, MainUsercenterFragment.class);
     }
 
-    private void showFragment(BaseFragment baseFragment, Class _class) {
+    private void showFragment(BaseFragment baseFragment, Class<? extends BaseFragment> _class) {
         if (currentFragment == baseFragment && currentFragment != null) return;
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         if (currentFragment != null) ft.hide(currentFragment);
