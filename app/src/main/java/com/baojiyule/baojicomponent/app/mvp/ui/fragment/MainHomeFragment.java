@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -35,6 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import me.jason.library.AutoPageLayout;
 import me.jessyan.armscomponent.commonres.utils.FragmentUtil;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
@@ -54,6 +56,8 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
  */
 public class MainHomeFragment extends BaseFragment<MainHomePresenter> implements MainHomeContract.View {
 
+    @BindView(R.id.contentLayout)
+    View contentLayout;
     @BindView(R.id.tabLayout)
     MagicIndicator tabLayout;
     @BindView(R.id.viewPager)
@@ -84,6 +88,11 @@ public class MainHomeFragment extends BaseFragment<MainHomePresenter> implements
         FragmentUtil.setTitle(this, R.string.main_home_title);
         initFragmentList();
         initViewPager();
+        initPageLayout();
+        //test
+        new Handler().postDelayed(() -> {
+            if (pageLayout != null) pageLayout.showContent();
+        }, 2000);
     }
 
     @Override
@@ -176,5 +185,17 @@ public class MainHomeFragment extends BaseFragment<MainHomePresenter> implements
             }
         });
         return commonNavigator;
+    }
+
+    private AutoPageLayout pageLayout;
+
+    private void initPageLayout() {
+        pageLayout = new AutoPageLayout.Builder(this)
+                .setTarget(contentLayout)
+                .setLoadingLayout(R.layout.public_layout_loading, null)
+                .setEmptyLayout(R.layout.public_layout_empty, null)
+                .setErrorLayout(R.layout.public_layout_error, null)
+                .showType(AutoPageLayout.SHOW_TYPE_LOADING)
+                .build();
     }
 }
