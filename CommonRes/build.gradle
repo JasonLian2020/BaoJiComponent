@@ -39,4 +39,6 @@ dependencies {
     api rootProject.ext.dependencies["smart-refresh-header"]
     //切换页面框架
     api rootProject.ext.dependencies["auto-page-layout"]
+    //页签框架
+    api rootProject.ext.dependencies["magic-indicator"]
 }
