@@ -13,6 +13,8 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 
 import com.baojiyule.baojicomponent.app.R;
 import com.baojiyule.baojicomponent.app.di.component.DaggerMainHomeComponent;
@@ -25,18 +27,20 @@ import com.jess.arms.utils.ArmsUtils;
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
 import net.lucode.hackware.magicindicator.abs.IPagerNavigator;
+import net.lucode.hackware.magicindicator.buildins.UIUtil;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.ColorTransitionPagerTitleView;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import me.jason.library.AutoPageLayout;
+import me.jessyan.armscomponent.commonres.magicindicator.titles.ColorFlipPagerTitleView;
 import me.jessyan.armscomponent.commonres.utils.FragmentUtil;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
@@ -127,7 +131,7 @@ public class MainHomeFragment extends BaseFragment<MainHomePresenter> implements
 
     }
 
-    private String[] mTitleList = {"0", "1", "2", "3", "4", "5"};
+    private String[] mTitleList = {"关注", "专享", "视频", "纯文", "纯图", "精华"};
     private List<BaseFragment> mFragmentList;
 
     private List<BaseFragment> initFragmentList() {
@@ -160,6 +164,7 @@ public class MainHomeFragment extends BaseFragment<MainHomePresenter> implements
 
     private IPagerNavigator initNaviagtor() {
         CommonNavigator commonNavigator = new CommonNavigator(getActivity());
+        commonNavigator.setScrollPivotX(0.65f);
         commonNavigator.setAdapter(new CommonNavigatorAdapter() {
 
             @Override
@@ -169,18 +174,24 @@ public class MainHomeFragment extends BaseFragment<MainHomePresenter> implements
 
             @Override
             public IPagerTitleView getTitleView(Context context, final int index) {
-                ColorTransitionPagerTitleView colorTransitionPagerTitleView = new ColorTransitionPagerTitleView(context);
-                colorTransitionPagerTitleView.setNormalColor(Color.GRAY);
-                colorTransitionPagerTitleView.setSelectedColor(Color.BLACK);
-                colorTransitionPagerTitleView.setText(mTitleList[index]);
-                colorTransitionPagerTitleView.setOnClickListener(view -> viewPager.setCurrentItem(index));
-                return colorTransitionPagerTitleView;
+                SimplePagerTitleView simplePagerTitleView = new ColorFlipPagerTitleView(context);
+                simplePagerTitleView.setText(mTitleList[index]);
+                simplePagerTitleView.setNormalColor(Color.parseColor("#999999"));
+                simplePagerTitleView.setSelectedColor(Color.parseColor("#333333"));
+                simplePagerTitleView.setOnClickListener(v -> viewPager.setCurrentItem(index));
+                return simplePagerTitleView;
             }
 
             @Override
             public IPagerIndicator getIndicator(Context context) {
                 LinePagerIndicator indicator = new LinePagerIndicator(context);
-                indicator.setMode(LinePagerIndicator.MODE_WRAP_CONTENT);
+                indicator.setMode(LinePagerIndicator.MODE_EXACTLY);
+                indicator.setLineHeight(UIUtil.dip2px(context, 6));
+                indicator.setLineWidth(UIUtil.dip2px(context, 10));
+                indicator.setRoundRadius(UIUtil.dip2px(context, 3));
+                indicator.setStartInterpolator(new AccelerateInterpolator());
+                indicator.setEndInterpolator(new DecelerateInterpolator(2.0f));
+                indicator.setColors(Color.parseColor("#00c853"));
                 return indicator;
             }
         });
