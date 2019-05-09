@@ -39,7 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import me.jason.library.AutoPageLayout;
+import me.jason.autopagelayout.AutoPageLayout;
 import me.jessyan.armscomponent.commonres.magicindicator.titles.ColorFlipPagerTitleView;
 import me.jessyan.armscomponent.commonres.utils.FragmentUtil;
 
