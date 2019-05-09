@@ -16,7 +16,7 @@ import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
-import me.jessyan.armscomponent.commonres.utils.FragmentUtil;
+import me.jessyan.armscomponent.commonsdk.utils.FragmentUtil;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 

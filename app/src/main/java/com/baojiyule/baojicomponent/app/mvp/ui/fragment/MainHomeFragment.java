@@ -41,7 +41,7 @@ import java.util.List;
 import butterknife.BindView;
 import me.jason.autopagelayout.AutoPageLayout;
 import me.jessyan.armscomponent.commonres.magicindicator.titles.ColorFlipPagerTitleView;
-import me.jessyan.armscomponent.commonres.utils.FragmentUtil;
+import me.jessyan.armscomponent.commonsdk.utils.FragmentUtil;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
