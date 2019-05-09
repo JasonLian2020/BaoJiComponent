@@ -25,5 +25,5 @@ android {
 
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
-    api project(":CommonRes")//依赖关系 CommonUI -> CommonRes -> CommonSDK, 所以如果业务模块需要公共 UI 组件就依赖 CommonUI, 如果不需要就只依赖 CommonSDK
+    api rootProject.ext.dependencies["common-res"]//依赖关系 CommonUI -> CommonRes -> CommonSDK, 所以如果业务模块需要公共 UI 组件就依赖 CommonUI, 如果不需要就只依赖 CommonSDK
 }
