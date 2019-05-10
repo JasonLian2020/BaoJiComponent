@@ -20,46 +20,51 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
+# 代码混淆压缩比，在0~7之间，默认为5，一般不做修改
 -optimizationpasses 5
-
-
+# 混合时不使用大小写混合，混合后的类名为小写
 -dontusemixedcaseclassnames
-
+# 指定不去忽略非公共库的类
 -dontskipnonpubliclibraryclasses
-
+# 指定不去忽略非公共库的类成员
 -dontskipnonpubliclibraryclassmembers
-
+# 不做预校验，preverify是proguard的四个步骤之一，Android不需要preverify，去掉这一步能够加快混淆速度。
 -dontpreverify
-
+# 这句话能够使我们的项目混淆后产生映射文件
+# 包含有类名->混淆后类名的映射关系
 -verbose
+# 保留Annotation不混淆 这在JSON实体映射时非常重要，比如fastJson
+-keepattributes *Annotation*,InnerClasses
+# 混淆前后的映射
 -printmapping priguardMapping.txt
-
+# 混淆时所采用的算法
 -optimizations !code/simplification/artithmetic,!field/*,!class/merging/*
 
 
-
 ################common###############
-
 -keep public class * implements com.jess.arms.integration.ConfigModule
-
- #实体类不参与混淆
+# 实体类不参与混淆
 -keep class com.jess.arms.widget.** { *; } #自定义控件不参与混淆
 -keep class * implements android.os.Parcelable {
   public static final android.os.Parcelable$Creator *;
 }
 -keepnames class * implements java.io.Serializable
+# 避免混淆泛型
 -keepattributes Signature
+# 不混淆资源类
 -keep class **.R$* {*;}
+# 忽略警告
 -ignorewarnings
+#
 -keepclassmembers class **.R$* {
     public static <fields>;
 }
-
--keepclasseswithmembernames class * { # 保持native方法不被混淆
+# 保持native方法不被混淆
+-keepclasseswithmembernames class * {
     native <methods>;
 }
-
--keepclassmembers enum * {  # 使用enum类型时需要注意避免以下两个方法混淆，因为enum类的特殊性，以下两个方法会被反射调用，
+# 使用enum类型时需要注意避免以下两个方法混淆，因为enum类的特殊性，以下两个方法会被反射调用
+-keepclassmembers enum * {
     public static **[] values();
     public static ** valueOf(java.lang.String);
 }
@@ -71,14 +76,7 @@
 -dontwarn android.support.**
 
 
-################alipay###############
-
--keep class com.alipay.android.app.IAlixPay{*;}
--keep class com.alipay.android.app.IAlixPay$Stub{*;}
--keep class com.alipay.android.app.IRemoteServiceCallback{*;}
--keep class com.alipay.android.app.IRemoteServiceCallback$Stub{*;}
--keep class com.alipay.sdk.app.PayTask{ public *;}
--keep class com.alipay.sdk.app.AuthTask{ public *;}
+################################CommonSDK start################################
 
 ################retrofit###############
 -dontwarn retrofit2.**
@@ -139,6 +137,7 @@
 -keepclassmembers class * {
     @org.greenrobot.eventbus.Subscribe <methods>;
 }
+-keep class org.greenrobot.eventbus.EventBus { *; }
 -keep enum org.greenrobot.eventbus.ThreadMode { *; }
 
 -keepclassmembers class * extends org.greenrobot.eventbus.util.ThrowableFailureEvent {
@@ -255,6 +254,33 @@
 # Marshmallow removed Notification.setLatestEventInfo()
 -dontwarn android.app.Notification
 
+
+################RetrofitUrlManager#################
+-keep class me.jessyan.retrofiturlmanager.** { *; }
+-keep interface me.jessyan.retrofiturlmanager.** { *; }
+
+
+################ARouter#################
+-keep public class com.alibaba.android.arouter.routes.**{*;}
+-keep public class com.alibaba.android.arouter.facade.**{*;}
+-keep class * implements com.alibaba.android.arouter.facade.template.ISyringe{*;}
+
+# 如果使用了 byType 的方式获取 Service，需添加下面规则，保护接口
+-keep interface * implements com.alibaba.android.arouter.facade.template.IProvider
+
+# 如果使用了 单类注入，即不定义接口实现 IProvider，需添加下面规则，保护实现
+-keep class * implements com.alibaba.android.arouter.facade.template.IProvider
+
 ################bugly#################
 -dontwarn com.tencent.bugly.**
 -keep public class com.tencent.bugly.**{*;}
+
+################################CommonSDK end################################
+
+################################CommonRes start################################
+
+################AndroidAutoSize#################
+-keep class me.jessyan.autosize.** { *; }
+-keep interface me.jessyan.autosize.** { *; }
+
+################################CommonRes end################################
