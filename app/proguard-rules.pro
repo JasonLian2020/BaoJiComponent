@@ -35,6 +35,8 @@
 -verbose
 # 保留Annotation不混淆 这在JSON实体映射时非常重要，比如fastJson
 -keepattributes *Annotation*,InnerClasses
+# 抛出异常时保留代码行号
+-keepattributes SourceFile,LineNumberTable
 # 混淆前后的映射
 -printmapping priguardMapping.txt
 # 混淆时所采用的算法
