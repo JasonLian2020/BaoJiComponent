@@ -75,6 +75,9 @@
 -keep interface android.support.** { *; }
 -dontwarn android.support.**
 
+# 使用gson进行解析json数据时，创建的实体类及其引用不能混淆，如果混淆就解析出问题
+-keep class **.mvp.model.entity.**{*;}
+
 
 ################################CommonSDK start################################
 
