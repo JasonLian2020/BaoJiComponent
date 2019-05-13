@@ -57,7 +57,7 @@ public class MainUsercenterFragment extends BaseFragment<MainUsercenterPresenter
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
-        FragmentUtil.setTitle(this, R.string.main_home_usercenter);
+        FragmentUtil.setTitle(this, R.string.main_usercenter_title);
     }
 
     @Override

@@ -57,7 +57,7 @@ public class MainRecommendFragment extends BaseFragment<MainRecommendPresenter> 
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
-        FragmentUtil.setTitle(this, R.string.main_home_recommend);
+        FragmentUtil.setTitle(this, R.string.main_recommend_title);
     }
 
     @Override

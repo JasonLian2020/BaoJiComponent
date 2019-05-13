@@ -1,5 +1,5 @@
 <resources>
     <string name="main_home_title">发现</string>
-    <string name="main_home_recommend">推荐</string>
-    <string name="main_home_usercenter">个人中心</string>
+    <string name="main_recommend_title">推荐</string>
+    <string name="main_usercenter_title">个人中心</string>
 </resources>
