@@ -280,6 +280,14 @@
 -dontwarn com.tencent.bugly.**
 -keep public class com.tencent.bugly.**{*;}
 
+################################CommonSDK end################################
+
+################################CommonRes start################################
+
+################AndroidAutoSize#################
+-keep class me.jessyan.autosize.** { *; }
+-keep interface me.jessyan.autosize.** { *; }
+
 ################BRVAH#################
 -keep class com.chad.library.adapter.** {
 *;
@@ -289,13 +297,5 @@
 -keepclassmembers  class **$** extends com.chad.library.adapter.base.BaseViewHolder {
      <init>(...);
 }
-
-################################CommonSDK end################################
-
-################################CommonRes start################################
-
-################AndroidAutoSize#################
--keep class me.jessyan.autosize.** { *; }
--keep interface me.jessyan.autosize.** { *; }
 
 ################################CommonRes end################################
