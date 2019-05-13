@@ -6,7 +6,6 @@
 
     <include layout="@layout/public_fragment_title" />
 
-
     <LinearLayout
         android:id="@+id/contentLayout"
         android:layout_width="match_parent"
